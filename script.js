@@ -38,15 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
     panel.hidden = !panel.classList.contains("active");
   });
 
-  const targetForButton = (button) => {
-    const label = button.textContent.trim().toLowerCase();
-    if (label.includes("demo")) return "#studio";
-    if (label.includes("start") || label.includes("get started") || label.includes("try")) return "#pricing";
-    return null;
-  };
-
   document.querySelectorAll("button").forEach((button) => {
-    const target = targetForButton(button);
+    const text = button.textContent.trim().toLowerCase();
+    const targetMap = {
+      "start free": "#pricing",
+      "watch demo": "#studio",
+      "get started": "#pricing",
+      "start pro": "#pricing",
+      "try saska ai": "#pricing",
+      "contact sales": "#faq"
+    };
+
+    const target = targetMap[text] || null;
     if (!target || button.classList.contains("tab-btn")) return;
 
     button.addEventListener("click", () => {
